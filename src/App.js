@@ -4,7 +4,7 @@ function App() {
   return (
     <div>
       ゼロから始めるReact入門
-      <List />
+      <List title="取扱言語一覧" />
     </div>
   );
 }
