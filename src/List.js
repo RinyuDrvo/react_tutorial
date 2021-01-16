@@ -1,5 +1,3 @@
-import { div } from "prelude-ls"
-
 export const List = ({ title }) => {
   return (
     <div>
