@@ -1,16 +1,29 @@
 import React from 'react';
 import { List } from './List';
 import { Form } from './Form';
-import { LANGUAGES } from './const/langages';
+import { getLanguages } from './const/langages';
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       tab: 'list',
-      langs: LANGUAGES
+      langs: []
     }
   }
 
+  // mount時発火
+  componentDidMount() {
+    console.log('App.js:componentDidMount');
+    this.fetchLanguages() ;
+  }
+
+  // 言語を取得
+  async fetchLanguages() {
+    const langs = await getLanguages();
+    this.setState({ langs })
+  }
+
+  // 言語をセット
   addLang(lang) {
     this.setState({
       tab: 'list',
