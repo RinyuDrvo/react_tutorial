@@ -1,8 +1,9 @@
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { List } from "./List";
 import { Form } from "./Form";
 import { getLanguages } from './const/languages';
+import { withLoading } from './hoc/withLoading';
 
 const Header = styled.header`
   display: flex;
@@ -23,21 +24,9 @@ const HeaderLi = styled.li`
   border-bottom: ${props => props.focused ? '2px solid #F44336' : 'none'};
 `
 
-function App() {
+function App({ data }) {
   const [tab, setTab] = useState('list');
-  const [langs, setLangs] = useState([]);
-
-  // mounting時発火
-  useEffect(() => {
-    console.log('App.js:useEffect');
-    fetchLanguages();
-  }, [])
-
-  // 言語取得
-  const fetchLanguages = async () => {
-    const languages = await getLanguages();
-    setLangs(languages);
-  }
+  const [langs, setLangs] = useState(data);
 
   // 言語セット
   const addLang = (lang) => {
@@ -60,4 +49,4 @@ function App() {
   );
 }
 
-export default App;
+export default withLoading(App, getLanguages);

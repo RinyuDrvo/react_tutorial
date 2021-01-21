@@ -12,11 +12,13 @@ const ListItem = styled.div`
 export const List = ({ langs }) => {
   return (
     <TabBodyContainer title="取り扱い言語リスト">
-      {
-        langs.map((lang, index) => {
-          return <ListItem key={index}>{lang}</ListItem>
-        })
-      }
+      <div>
+        {
+          langs.map((lang, index) => {
+            return <ListItem key={index}>{lang}</ListItem>
+          })
+        }
+      </div>
     </TabBodyContainer>
   )
 }
