@@ -3,6 +3,7 @@ import { List } from './List';
 import { Form } from './Form';
 import { getLanguages } from './const/langages';
 import styled from 'styled-components';
+import { withLoading } from './hoc/withLoading';
 
 const Header = styled.div`
   displey: flex;
@@ -29,20 +30,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       tab: 'list',
-      langs: []
+      langs: props.data
     }
-  }
-
-  // mount時発火
-  componentDidMount() {
-    console.log('App.js:componentDidMount');
-    this.fetchLanguages() ;
-  }
-
-  // 言語を取得
-  async fetchLanguages() {
-    const langs = await getLanguages();
-    this.setState({ langs })
   }
 
   // 言語をセット
@@ -73,4 +62,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default withLoading(App, getLanguages);
