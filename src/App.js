@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { List } from "./List";
 import { Form } from "./Form";
-import { getLanguages } from './const/languages';
-import { withLoading } from './hoc/withLoading';
 import { Header } from './Header';
 
 function App({ data }) {
@@ -25,4 +23,4 @@ function App({ data }) {
   );
 }
 
-export default withLoading(App, getLanguages);
+export default App;
