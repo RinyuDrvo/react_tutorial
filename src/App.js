@@ -1,11 +1,19 @@
 import React from 'react';
 import { List } from './List';
 import { Form } from './Form';
-import { getLanguages } from './const/langages';
-import { withLoading } from './hoc/withLoading';
 import { Header } from './Header';
+import { ThemeContext } from './contexts/ThemeContext';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  height: 100%;
+  color: ${({ theme }) => theme.color};
+  background-color: ${({ theme }) => theme.backgroundColor};
+`
 
 class App extends React.Component {
+  static contextType = ThemeContext;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -24,17 +32,18 @@ class App extends React.Component {
 
   render() {
     const { tab, langs } = this.state;
+    const [theme] = this.context;
     return (
-      <div>
+      <Container theme={theme}>
         <Header tab={tab} setTab={(t) => this.setState({ tab: t })} />
         {
           tab === 'list' ?
             <List langs={langs} /> :
             <Form onAddLang={(lang) => this.addLang(lang)}/>
         }
-      </div>
+      </Container>
     )
   }
 }
 
-export default withLoading(App, getLanguages);
+export default App;
